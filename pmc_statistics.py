@@ -132,7 +132,8 @@ def basic_stats():
 
 
 
-
+if __name__ == '__main__':
+    basic_stats()
 
 
 
