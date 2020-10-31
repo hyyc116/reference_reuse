@@ -136,7 +136,7 @@ def basic_stats():
 def plot_stats():
 
     # 随着时间文章熟练的变化
-    plt.figure(figsiuze=(5,4))
+    plt.figure(figsize=(5,4))
     year_pnum = json.loads(open('data/year_pnum.json').read())
     
     xs = []
