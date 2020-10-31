@@ -8,7 +8,9 @@
     3. 参考文献数量分布。
     4. 作者论文数量分布。
     5. 文章总数量以及引用总数量。 Total number of papers: 2,070,120 ,Total citation links: 49,065,695,Number of unique authors: 4383161
-
+    
+    Total number of papers: 2070120 ,Total citation links: 29103904
+    Number of unique authors: 2726338
 ]
 '''
 
@@ -54,7 +56,6 @@ def basic_stats():
         if line.startswith('pm'):
             continue
 
-        total_paper_num+=1
 
         splits = line.split('\t')
 
@@ -75,7 +76,7 @@ def basic_stats():
         if year<1980:
             continue 
 
-        if year>2015:
+        if year>2018:
             continue
 
         if refstr is not None:
@@ -86,6 +87,8 @@ def basic_stats():
         else:
 
             refs = []
+
+        total_paper_num+=1
 
         refnum_count[len(refs)]+=1
         
