@@ -70,6 +70,14 @@ def basic_stats():
 
         authors = [author.split('_')[1] for author in author_str.split('|')]
         year = int(date.split('-')[0])
+
+
+        if year<1980:
+            continue 
+
+        if year>2015:
+            continue
+
         if refstr is not None:
 
             refs = refstr.split('|')
@@ -161,7 +169,7 @@ def plot_stats():
 
 
 if __name__ == '__main__':
-    # basic_stats()
+    basic_stats()
 
     plot_stats()
 
