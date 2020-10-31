@@ -7,7 +7,7 @@
     2. 引用次数分布。
     3. 参考文献数量分布。
     4. 作者论文数量分布。
-    5. 文章总数量以及引用总数量。
+    5. 文章总数量以及引用总数量。 Total number of papers: 2,070,120 ,Total citation links: 49,065,695
 
 ]
 '''
@@ -100,6 +100,9 @@ def basic_stats():
     open("data/pid_cn.json",'w').write(json.dumps(pid_cn))
     print('data saved to data/pid_cn.json.')
 
+    open('data/year_pnum.json','w').write(json.dumps(year_pnum))
+    print('data saved to data/year_pnum.json')
+
     # 论文数量分布
     open('data/ref_num_dis.json','w').write(json.dumps(refnum_count))
     print('data saved to data/ref_num_dis.json.')
@@ -127,7 +130,12 @@ def basic_stats():
 
 
     print('Total number of papers:',total_paper_num,',Total citation links:',total_citation_links)
+    print('Number of unique authors:',len(author_pids.keys()))
 
+
+def plot_stats():
+
+    # 随着时间文章熟练的变化
 
 
 
