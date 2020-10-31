@@ -83,8 +83,7 @@ def basic_stats():
         
         year_pnum[year]+=1
 
-        pid_year[pmid] = year
-
+        pid_year[pid] = year
 
         for ref in refs:
             pid_cn[ref]+=1
