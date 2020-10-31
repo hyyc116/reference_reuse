@@ -7,7 +7,7 @@
     2. 引用次数分布。
     3. 参考文献数量分布。
     4. 作者论文数量分布。
-    5. 文章总数量以及引用总数量。 Total number of papers: 2,070,120 ,Total citation links: 49,065,695
+    5. 文章总数量以及引用总数量。 Total number of papers: 2,070,120 ,Total citation links: 49,065,695,Number of unique authors: 4383161
 
 ]
 '''
@@ -136,12 +136,34 @@ def basic_stats():
 def plot_stats():
 
     # 随着时间文章熟练的变化
-    pass
+    plt.figure(5,4)
+    year_pnum = json.loads(open('data/year_pnum.json').read())
+    
+    xs = []
+    ys = []
+    for year in sorted(year_pnum.keys()):
+        xs.append(int(year))
+        ys.append(year_pnum[year])
+
+    plt.plot(xs,ys)
+
+    plt.xlabel('year')
+    plt.ylabel('number of publications')    
+
+    plt.yscale('log')
+
+    plt.tight_layout()
+
+    plt.savefig('fig/year_paper_num.png',dpi=400)
+    print('fig saved to fig/year_paper_num.png.')
+
 
 
 
 if __name__ == '__main__':
-    basic_stats()
+    # basic_stats()
+
+    plot_stats()
 
 
 
