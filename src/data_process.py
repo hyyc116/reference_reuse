@@ -8,13 +8,15 @@ from basic_config import *
 def process_data():
 
     logging.info('loading pid cn data ...')
-    pid_cn = json.loads(open('data/pid_cn.json').read())
+    pid_cn = json.loads(open('../MAG_data_processing/data/pid_cn.json').read())
 
     logging.info('loading pid pubyear data ...')
-    pid_pubyear = json.loads(open('data/pid_pubyear.json').read())
+    pid_pubyear = json.loads(
+        open('../MAG_data_processing/data/pid_pubyear.json').read())
 
     logging.info('loading pid seq authors ... ')
-    pid_seq_author = json.loads(open('data/pid_seq_author.json').read())
+    pid_seq_author = json.loads(
+        open('../MAG_data_processing/data/pid_seq_author.json').read())
 
     logging.info('read paper citation relations ...')
     pid_cits = {}
