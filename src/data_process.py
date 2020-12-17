@@ -19,7 +19,7 @@ def process_data():
         open('../MAG_data_processing/data/pid_seq_author.json').read())
 
     logging.info('read paper citation relations ...')
-    pid_cits = {}
+    pid_cits = defaultdict(list)
     query_op = dbop()
     sql = 'select paper_id,paper_reference_id from mag_core.paper_references'
     process = 0
