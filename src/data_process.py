@@ -1,10 +1,8 @@
-#coding:utf-8
+# coding:utf-8
 
 from basic_config import *
 
 # 处理mag的数据，处理每一篇论文的作者引用次数等
-
-
 def process_data():
 
     logging.info('loading pid cn data ...')
