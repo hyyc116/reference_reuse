@@ -3,6 +3,8 @@
 from basic_config import *
 
 # 处理mag的数据，处理每一篇论文的作者引用次数等
+
+
 def process_data():
 
     logging.info('loading pid cn data ...')
@@ -137,7 +139,6 @@ def fit_powlaw_N1(nums, counts):
     a, _ = scipy.optimize.curve_fit(
         linear_func, np.log(nums), np.log(counts))[0]
 
-    print(N1, a)
     return N1, a
 
 
