@@ -138,3 +138,7 @@ def fit_powlaw_N1(nums, counts):
 
     print(N1, a)
     return N1, a
+
+
+if __name__ == "__main__":
+    process_data()
