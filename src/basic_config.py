@@ -1,4 +1,5 @@
 #coding:utf-8
+import psycopg2
 import scipy
 import statsmodels.api as sm
 from cycler import cycler
@@ -34,7 +35,6 @@ from collections import Counter
 import matplotlib
 matplotlib.use('Agg')
 # from scipy.interpolate import spline
-# import psycopg2
 lowess = sm.nonparametric.lowess
 
 # from skmisc.loess import loess
