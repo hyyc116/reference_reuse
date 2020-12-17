@@ -20,6 +20,7 @@ def process_data():
 
     logging.info('read paper citation relations ...')
     pid_cits = {}
+    query_op = dbop()
     sql = 'select paper_id,paper_reference_id from mag_core.paper_references'
     process = 0
     for paper_id, paper_reference_id in query_op.query_database(sql):
