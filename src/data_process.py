@@ -114,7 +114,10 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
     for author in author_cits.keys():
         if len(author_cits[author]) == N1:
 
-            cit_years = [pid_pubyear[pid] for pid in author_cits[author]]
+            cit_years = [
+                pid_pubyear.get(pid, None) for pid in author_cits[author]
+                if pid_pubyear.get(pid, None) is not None
+            ]
 
             yd = np.max(cit_years) - np.min(cit_years)
 
