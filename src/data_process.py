@@ -45,8 +45,8 @@ def process_data():
         if progress % 1000000 == 0:
             logging.info(f'progress {process} ...')
 
-        N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid,
-                                                  pid_cits[pid], pid_seq_author, pid_pubyear)
+        N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid, pid_cits[pid],
+                                                  pid_seq_author, pid_pubyear)
 
         if N1 is None or a is None:
             continue
@@ -59,12 +59,12 @@ def process_data():
 
         if len(lines) == 10000000:
 
-            outfile.write('\n'.join(lines)+'\n')
+            outfile.write('\n'.join(lines) + '\n')
 
             lines = []
 
     if len(lines) > 0:
-        outfile.write('\n'.join(lines)+'\n')
+        outfile.write('\n'.join(lines) + '\n')
 
     logging.info('attrs saved to data/pid_reuse_attrs.csv.')
 
@@ -105,7 +105,8 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
         return None, None, None, None, isReuse
 
     Max_N = np.max(nums)
-    DR = np.max([n for n in selfs_num.values()]) / float(Max_N)
+    DR = 0 if len(selfs_num.values()) == 0 else np.max(
+        [n for n in selfs_num.values()]) / float(Max_N)
 
     N1, a = fit_powlaw_N1(nums, counts)
 
@@ -115,7 +116,7 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
 
             cit_years = [pid_pubyear[pid] for pid in author_cits[author]]
 
-            yd = np.max(cit_years)-np.min(cit_years)
+            yd = np.max(cit_years) - np.min(cit_years)
 
             yds.append(yd)
 
@@ -132,12 +133,13 @@ def fit_powlaw_N1(nums, counts):
         if counts[i] == 1:
             break
 
-    counts = np.array(counts)/float(np.sum(counts))
+    counts = np.array(counts) / float(np.sum(counts))
 
-    def linear_func(x, a, b): return a*x+b
+    def linear_func(x, a, b):
+        return a * x + b
 
-    a, _ = scipy.optimize.curve_fit(
-        linear_func, np.log(nums), np.log(counts))[0]
+    a, _ = scipy.optimize.curve_fit(linear_func, np.log(nums),
+                                    np.log(counts))[0]
 
     return N1, a
 
