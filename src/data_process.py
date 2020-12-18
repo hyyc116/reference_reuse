@@ -105,7 +105,7 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
         return None, None, None, None, isReuse
 
     Max_N = np.max(nums)
-    DR = np.max(selfs_num.values())/float(Max_N)
+    DR = np.max(list(selfs_num.values()))/float(Max_N)
 
     N1, a = fit_powlaw_N1(nums, counts)
 
