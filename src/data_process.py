@@ -115,7 +115,7 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
         if len(author_cits[author]) == N1:
 
             cit_years = [
-                pid_pubyear.get(pid, None) for pid in author_cits[author]
+                int(pid_pubyear.get(pid, None)) for pid in author_cits[author]
                 if pid_pubyear.get(pid, None) is not None
             ]
 
