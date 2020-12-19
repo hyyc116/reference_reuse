@@ -45,6 +45,9 @@ def process_data():
         if progress % 1000000 == 0:
             logging.info(f'progress {process} ...')
 
+            if pid_seq_author.get(pid, None) is None:
+                continue
+
         N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid, pid_cits[pid],
                                                   pid_seq_author, pid_pubyear)
 
@@ -127,7 +130,7 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
 
 
 def fit_powlaw_N1(nums, counts):
-    print(len(nums), len(counts))
+    # print(len(nums), len(counts))
 
     N1 = None
     for i, num in enumerate(nums):
