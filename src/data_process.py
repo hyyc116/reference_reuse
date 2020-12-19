@@ -38,6 +38,8 @@ def process_data():
 
     progress = 0
 
+    cn_reuse = defaultdict(list)
+
     for pid in pid_cits:
 
         progress += 1
@@ -56,6 +58,8 @@ def process_data():
 
         cn = pid_cn[pid]
 
+        cn_reuse[cn].append(isReuse)
+
         line = f"{pid},{cn},{DR},{a},{N1},{yd}"
 
         lines.append(line)
@@ -70,6 +74,10 @@ def process_data():
         outfile.write('\n'.join(lines) + '\n')
 
     logging.info('attrs saved to data/pid_reuse_attrs.csv.')
+
+    open('data/cn_reuse.json', 'w').write(json.dumps(cn_reuse))
+
+    logging.info('data saved.')
 
 
 def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
@@ -104,7 +112,7 @@ def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
     if len(nums) < len(cits):
         isReuse = True
 
-    if len(nums) == 1:
+    if len(nums) <= 1:
         return None, None, None, None, isReuse
 
     Max_N = np.max(nums)
