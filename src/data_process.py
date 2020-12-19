@@ -45,8 +45,8 @@ def process_data():
         if progress % 1000000 == 0:
             logging.info(f'progress {process} ...')
 
-            if pid_seq_author.get(pid, None) is None:
-                continue
+        if pid_seq_author.get(pid, None) is None:
+            continue
 
         N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid, pid_cits[pid],
                                                   pid_seq_author, pid_pubyear)
