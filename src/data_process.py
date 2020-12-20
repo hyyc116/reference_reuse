@@ -71,7 +71,7 @@ def process_data():
         progress += 1
 
         if progress % 1000000 == 0:
-            logging.info(f'progress {process} ...')
+            logging.info(f'progress {progress} ...')
 
         pubyear = pid_pubyear.get(pid, None)
         authors = [a for a in pid_seq_author[pid].values()]
@@ -119,7 +119,7 @@ def process_data():
         progress += 1
 
         if progress % 1000000 == 0:
-            logging.info(f'progress {process} ...')
+            logging.info(f'progress {progress} ...')
 
         max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
             ref_years, papers)
