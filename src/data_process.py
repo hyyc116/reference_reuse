@@ -19,7 +19,13 @@ def process_data():
         open('../MAG_data_processing/data/pid_seq_author.json').read())
 
     logging.info('read paper citation relations ...')
-    pid_cits = defaultdict(list)
+    # 论文被引用记录
+    pid_author_cits = defaultdict(lambda: defaultdict(list))
+    # 作者引用参考文献的记录
+    author_ref_years = defaultdict(lambda: defaultdict(list))
+
+    author_papers = defaultdict(set)
+
     query_op = dbop()
     sql = 'select paper_id,paper_reference_id from mag_core.paper_references'
     process = 0
@@ -28,44 +34,60 @@ def process_data():
         if process % 10000000 == 0:
             logging.info(f'progress {process} ....')
 
-        pid_cits[paper_reference_id].append(paper_id)
+        # 排除发表年份以及作者数据缺失的引用关系
+        if pid_pubyear.get(paper_id, 9999) > 2020 or pid_pubyear.get(
+                paper_reference_id, 9999) > 2020:
+            continue
+
+        authors = pid_seq_author.get(paper_id, None)
+
+        ref_authors = pid_seq_author.get(paper_reference_id, None)
+
+        if authors is None or ref_authors is None:
+            continue
+
+        # 将论文被引用和作者引用论文记录下来
+        for author in authors.values():
+            pid_author_cits[paper_reference_id][author].append(
+                pid_pubyear.get(paper_id))
+
+            author_ref_years[author][paper_reference_id].append(
+                pid_pubyear.get(paper_id))
+
+            author_papers[author].add(paper_id)
 
     logging.info('start to cal paper attrs ...')
 
-    lines = ['pid,pubyear,cn,DR,a,N1,yd']
+    lines = [
+        'pid,pubyear,cn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
+    ]
 
-    outfile = open('data/pid_reuse_attrs2.csv', 'w')
+    outfile = open('data/paper_reuse_attrs.csv', 'w')
 
     progress = 0
 
-    cn_reuse = defaultdict(list)
-
-    for pid in pid_cits:
+    for pid in pid_author_cits.keys():
 
         progress += 1
 
         if progress % 1000000 == 0:
             logging.info(f'progress {process} ...')
 
-        if pid_seq_author.get(pid, None) is None:
-            continue
-
         pubyear = pid_pubyear.get(pid, None)
+        authors = [a for a in pid_seq_author[pid].values()]
 
         if pubyear is None:
             continue
 
-        N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid, pid_cits[pid],
-                                                  pid_seq_author, pid_pubyear)
+        max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
+            pid_author_cits[pid], authors)
 
         if N1 is None or a is None:
             continue
 
         cn = pid_cn[pid]
 
-        cn_reuse[cn].append(isReuse)
-
-        line = f"{pid},{pubyear},{cn},{DR},{a},{N1},{yd}"
+        line = f"{pid},{pubyear},{cn},{max_num},{max_num_yd},{N1},{a},{n1_yd},{sc_num_avg},{sc_yd_avg},{max_sc_num},{max_sc_yd}"
 
         lines.append(line)
 
@@ -78,68 +100,156 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/pid_reuse_attrs2.csv.')
+    logging.info('attrs saved to data/paper_reuse_attrs.csv.')
 
-    open('data/cn_reuse.json', 'w').write(json.dumps(cn_reuse))
+    #  从作者角度来计算这些属性
+    logging.info('start to cal author attrs ...')
 
-    logging.info('data saved.')
+    lines = [
+        'author_id,pn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
+    ]
 
+    outfile = open('data/author_reuse_attrs.csv', 'w')
 
-def cal_alpha_and_n1(pid, cits, pid_seq_author, pid_pubyear):
+    progress = 0
+    for author in author_ref_years:
+        papers = author_papers[author]
+        ref_years = author_ref_years[author]
 
-    selfs = set(pid_seq_author[pid].values())
+        progress += 1
 
-    author_cits = defaultdict(list)
-    author_num = defaultdict(int)
-    selfs_num = defaultdict(int)
-    for cit in cits:
+        if progress % 1000000 == 0:
+            logging.info(f'progress {process} ...')
 
-        if pid_seq_author.get(cit, None) is None:
+        max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
+            ref_years, papers)
+
+        if N1 is None or a is None:
             continue
 
-        for author in pid_seq_author[cit].values():
-            author_cits[author].append(cit)
-            author_num[author] += 1
+        pn = len(papers)
 
-            if author in selfs:
-                selfs_num[author] += 1
+        line = f"{author},{pn},{max_num},{max_num_yd},{N1},{a},{n1_yd},{sc_num_avg},{sc_yd_avg},{max_sc_num},{max_sc_yd}"
 
-    num_counter = Counter(author_num.values())
+        lines.append(line)
+
+        if len(lines) == 10000000:
+
+            outfile.write('\n'.join(lines) + '\n')
+
+            lines = []
+
+    if len(lines) > 0:
+        outfile.write('\n'.join(lines) + '\n')
+
+    logging.info('attrs saved to data/author_reuse_attrs.csv.')
+
+
+def cal_author_alpha_and_n1(ref_years, papers):
+
+    num_counter = defaultdict(int)
+    num_yds = defaultdict(list)
+
+    sc_nums = []
+    sc_yds = []
+    sc_num_yds = defaultdict(list)
+
+    for ref in ref_years:
+        years = ref_years[ref]
+        num = len(years)
+        yd = np.max(years) - np.min(years)
+
+        num_counter[num] += 1
+        num_yds[num].append(yd)
+
+        if ref in papers:
+
+            sc_nums.append(num)
+            sc_yds.append(yd)
+            sc_num_yds[num].append(yd)
 
     nums = []
     counts = []
-
+    # yds = []
     for num in sorted(num_counter.keys()):
         nums.append(num)
         counts.append(num_counter[num])
+        # yds.append(np.mean(num_yds[num]))
 
-    isReuse = False
-    if len(nums) < len(cits):
-        isReuse = True
+    # 如果只有一个点 就是所有人引用次数都一样 在低被引的时候可能出现
+    if len(nums) == 1:
+        N1, a = nums[0], 0
+    else:
+        N1, a = fit_powlaw_N1(nums, counts)
 
-    if len(nums) <= 1:
-        return None, None, None, None, isReuse
+    if len(sc_num_yds.keys()) == 0:
+        max_sc_num = 0
+        max_sc_yd = 0
+    else:
+        max_sc_num = sorted(sc_num_yds.keys(),
+                            key=lambda x: len(sc_num_yds[x]),
+                            reverse=True)[0]
+        max_sc_yd = np.mean(sc_yds[max_sc_num])
 
-    Max_N = np.max(nums)
-    DR = 0 if len(selfs_num.values()) == 0 else np.max(
-        [n for n in selfs_num.values()]) / float(Max_N)
+    # 最大重复引用次数，最大重复引用次数年份跨度，N1，a, N1年份跨度，自引平均次数，自引平均跨度，最大自引次数，最大自引对应的年份
+    return np.max(nums), np.mean(num_yds[np.max(nums)]), N1, a, np.mean(
+        num_yds[N1]), np.mean(sc_nums), np.mean(sc_yds), max_sc_num, max_sc_yd
 
-    N1, a = fit_powlaw_N1(nums, counts)
 
-    yds = []
-    for author in author_cits.keys():
-        if len(author_cits[author]) == N1:
+def cal_paper_alpha_and_n1(author_cits, authors):
 
-            cit_years = [
-                int(pid_pubyear.get(pid, None)) for pid in author_cits[author]
-                if pid_pubyear.get(pid, None) is not None
-            ]
+    # 作者重复引用次数的分布
+    num_counter = defaultdict(int)
 
-            yd = np.max(cit_years) - np.min(cit_years)
+    authors = set(authors)
+    # self citation
+    sc_num_yds = defaultdict(list)
+    sc_yds = []
+    sc_nums = []
 
-            yds.append(yd)
+    # 重复引用次数的年份
+    num_yds = defaultdict(list)
+    for a in author_cits:
+        years = author_cits[a]
+        num = len(author_cits[years])
+        num_counter[num] += 1
 
-    return N1, a, np.mean(yds), DR, isReuse
+        yd = np.max(years) - np.min(years)
+        num_yds[num].append(yd)
+
+        # 如果是自引
+        if a in authors:
+            sc_num_yds[num].append(yd)
+
+            sc_nums.append(num)
+            sc_yds.append(yd)
+
+    nums = []
+    counts = []
+    # yds = []
+    for num in sorted(num_counter.keys()):
+        nums.append(num)
+        counts.append(num_counter[num])
+        # yds.append(np.mean(num_yds[num]))
+
+    # 如果只有一个点 就是所有人引用次数都一样 在低被引的时候可能出现
+    if len(nums) == 1:
+        N1, a = nums[0], 0
+    else:
+        N1, a = fit_powlaw_N1(nums, counts)
+
+    if len(sc_num_yds.keys()) == 0:
+        max_sc_num = 0
+        max_sc_yd = 0
+    else:
+        max_sc_num = sorted(sc_num_yds.keys(),
+                            key=lambda x: len(sc_num_yds[x]),
+                            reverse=True)[0]
+        max_sc_yd = np.mean(sc_yds[max_sc_num])
+
+    # 最大重复引用次数，最大重复引用次数年份跨度，N1，a, N1年份跨度，自引平均次数，自引平均跨度，最大自引次数，最大自引对应的年份
+    return np.max(nums), np.mean(num_yds[np.max(nums)]), N1, a, np.mean(
+        num_yds[N1]), np.mean(sc_nums), np.mean(sc_yds), max_sc_num, max_sc_yd
 
 
 def fit_powlaw_N1(nums, counts):
