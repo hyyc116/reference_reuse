@@ -32,7 +32,7 @@ def process_data():
 
     logging.info('start to cal paper attrs ...')
 
-    lines = ['pid,cn,DR,a,N1,yd']
+    lines = ['pid,pubyear,cn,DR,a,N1,yd']
 
     outfile = open('data/pid_reuse_attrs.csv', 'w')
 
@@ -50,6 +50,11 @@ def process_data():
         if pid_seq_author.get(pid, None) is None:
             continue
 
+        pubyear = pid_pubyear.get(pid, None)
+
+        if pubyear is None:
+            continue
+
         N1, a, yd, DR, isReuse = cal_alpha_and_n1(pid, pid_cits[pid],
                                                   pid_seq_author, pid_pubyear)
 
@@ -60,7 +65,7 @@ def process_data():
 
         cn_reuse[cn].append(isReuse)
 
-        line = f"{pid},{cn},{DR},{a},{N1},{yd}"
+        line = f"{pid},{pubyear},{cn},{DR},{a},{N1},{yd}"
 
         lines.append(line)
 
