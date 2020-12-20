@@ -34,7 +34,7 @@ def process_data():
 
     lines = ['pid,pubyear,cn,DR,a,N1,yd']
 
-    outfile = open('data/pid_reuse_attrs.csv', 'w')
+    outfile = open('data/pid_reuse_attrs2.csv', 'w')
 
     progress = 0
 
@@ -78,7 +78,7 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/pid_reuse_attrs.csv.')
+    logging.info('attrs saved to data/pid_reuse_attrs2.csv.')
 
     open('data/cn_reuse.json', 'w').write(json.dumps(cn_reuse))
 
