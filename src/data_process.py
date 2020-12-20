@@ -35,8 +35,8 @@ def process_data():
             logging.info(f'progress {process} ....')
 
         # 排除发表年份以及作者数据缺失的引用关系
-        if pid_pubyear.get(paper_id, 9999) > 2020 or pid_pubyear.get(
-                paper_reference_id, 9999) > 2020:
+        if int(pid_pubyear.get(paper_id, 9999)) > 2020 or int(
+                pid_pubyear.get(paper_reference_id, 9999)) > 2020:
             continue
 
         authors = pid_seq_author.get(paper_id, None)
@@ -73,7 +73,7 @@ def process_data():
         if progress % 1000000 == 0:
             logging.info(f'progress {progress} ...')
 
-        pubyear = pid_pubyear.get(pid, None)
+        pubyear = int(pid_pubyear.get(pid, None))
         authors = [a for a in pid_seq_author[pid].values()]
 
         if pubyear is None:
