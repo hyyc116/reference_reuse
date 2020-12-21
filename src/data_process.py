@@ -31,8 +31,8 @@ def process_data():
     process = 0
     for paper_id, paper_reference_id in query_op.query_database(sql):
         process += 1
-        if process % 10000000 == 0:
-            logging.info(f'progress {process} ....')
+        if process % 100000000 == 0:
+            logging.info(f'read progress {process} ....')
 
         # 排除发表年份以及作者数据缺失的引用关系
         if int(pid_pubyear.get(paper_id, 9999)) > 2020 or int(
@@ -71,7 +71,7 @@ def process_data():
         progress += 1
 
         if progress % 1000000 == 0:
-            logging.info(f'progress {progress} ...')
+            logging.info(f'paper progress {progress} ...')
 
         pubyear = int(pid_pubyear.get(pid, None))
         authors = [a for a in pid_seq_author[pid].values()]
@@ -119,7 +119,7 @@ def process_data():
         progress += 1
 
         if progress % 1000000 == 0:
-            logging.info(f'progress {progress} ...')
+            logging.info(f'author progress {progress} ...')
 
         max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
             ref_years, papers)
