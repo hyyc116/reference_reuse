@@ -249,7 +249,7 @@ def cal_paper_alpha_and_n1(author_cits, authors):
         max_sc_num = sorted(sc_num_yds.keys(),
                             key=lambda x: len(sc_num_yds[x]),
                             reverse=True)[0]
-        max_sc_yd = np.mean(sc_yds[max_sc_num])
+        max_sc_yd = np.mean(sc_num_yds[max_sc_num])
 
     # 最大重复引用次数，最大重复引用次数年份跨度，N1，a, N1年份跨度，自引平均次数，自引平均跨度，最大自引次数，最大自引对应的年份
     return np.max(nums), np.mean(num_yds[np.max(nums)]), N1, a, np.mean(
