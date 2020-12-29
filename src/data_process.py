@@ -53,10 +53,10 @@ def process_data():
         # 将论文被引用和作者引用论文记录下来
         for author in authors.values():
             pid_author_cits[paper_reference_id][author].append(
-                pid_pubyear.get(paper_id))
+                int(pid_pubyear.get(paper_id)))
 
             author_ref_years[author][paper_reference_id].append(
-                pid_pubyear.get(paper_id))
+                int(pid_pubyear.get(paper_id)))
 
             author_papers[author].add(paper_id)
 
