@@ -213,9 +213,9 @@ def cal_paper_alpha_and_n1(author_cits, authors):
 
     # 重复引用次数的年份
     num_yds = defaultdict(list)
-    for a in author_cits:
+    for a in author_cits.keys():
         years = author_cits[a]
-        num = len(author_cits[years])
+        num = len(years)
         num_counter[num] += 1
 
         yd = np.max(years) - np.min(years)
