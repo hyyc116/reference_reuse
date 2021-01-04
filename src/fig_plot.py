@@ -25,7 +25,7 @@ def plot_paper_relations():
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data['a'] < 0], x='a', bins=50, ax=ax)
+    sns.histplot(data=data[data['a'] != 0], x='a', bins=50, ax=ax)
 
     sns.despine()
 
