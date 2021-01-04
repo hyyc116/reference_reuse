@@ -72,7 +72,7 @@ def plot_paper_relations():
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data, x='cn', bins=50, ax=ax)
+    sns.lineplot(data=data, x='cn', y='N1', ax=ax)
 
     sns.despine()
 
