@@ -31,10 +31,27 @@ def plot_paper_relations():
 
     sns.despine()
 
+    ax.set_xlabel('$\alpha$')
+    ax.set_ylabel('number of publications')
+
     plt.tight_layout()
 
     plt.savefig('fig/a_dis.png', dpi=800)
     logging.info('N1 dis saved to fig/a_dis.png')
+
+    fig, ax = plt.subplots(figsize=(5, 4))
+
+    sns.lineplot(data=data, x='cn', y='a', bins=50, ax=ax)
+
+    sns.despine()
+
+    ax.set_ylabel('$\alpha$')
+    ax.set_xlabel('number of citations')
+
+    plt.tight_layout()
+
+    plt.savefig('fig/cn_a_dis.png', dpi=800)
+    logging.info('N1 dis saved to fig/cn_a_dis.png')
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
@@ -45,10 +62,25 @@ def plot_paper_relations():
 
     sns.despine()
 
+    ax.set_xlabel('N1')
+    ax.set_ylabel('number of publications')
+
     plt.tight_layout()
 
     plt.savefig('fig/N1_dis.png', dpi=800)
     logging.info('N1 dis saved to fig/N1_dis.png')
+
+    fig, ax = plt.subplots(figsize=(5, 4))
+
+    sns.lineplot(data=data, x='cn', y='N1', bins=50, ax=ax)
+
+    sns.despine()
+
+    ax.set_ylabel('N1')
+    ax.set_xlabel('number of citations')
+
+    plt.savefig('fig/cn_N1_dis.png', dpi=800)
+    logging.info('N1 dis saved to fig/cn_N1_dis.png')
 
 
 if __name__ == "__main__":
