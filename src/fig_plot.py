@@ -31,6 +31,20 @@ def plot_paper_relations():
 
     plt.tight_layout()
 
+    plt.savefig('fig/a_dis.png', dpi=800)
+    logging.info('N1 dis saved to fig/a_dis.png')
+
+    fig, ax = plt.subplots(figsize=(5, 4))
+
+    # 对所关注的属性都进行分布画线
+    sns.set_theme(style='ticks')
+
+    sns.histplot(data=data[data['a'] != 0], x='N1', bins=50, ax=ax)
+
+    sns.despine()
+
+    plt.tight_layout()
+
     plt.savefig('fig/N1_dis.png', dpi=800)
     logging.info('N1 dis saved to fig/N1_dis.png')
 
