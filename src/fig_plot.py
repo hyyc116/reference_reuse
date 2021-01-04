@@ -19,13 +19,15 @@ import pandas as pd
 def plot_paper_relations():
 
     data = pd.read_csv('data/paper_reuse_attrs.csv')
-
+    data = data[data['a'] != 0]
+    data = data[data['a'] < 15]
+    data = data[data['N1'] < 100]
     fig, ax = plt.subplots(figsize=(5, 4))
 
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data['a'] != 0], x='a', bins=50, ax=ax)
+    sns.histplot(data=data, x='a', bins=50, ax=ax)
 
     sns.despine()
 
@@ -39,10 +41,7 @@ def plot_paper_relations():
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data[data['a'] != 0]['N1'] < 50],
-                 x='N1',
-                 bins=50,
-                 ax=ax)
+    sns.histplot(data=data, x='N1', bins=50, ax=ax)
 
     sns.despine()
 
