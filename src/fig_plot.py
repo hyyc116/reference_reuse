@@ -31,7 +31,7 @@ def plot_paper_relations():
 
     sns.despine()
 
-    ax.set_xlabel('$\alpha$')
+    ax.set_xlabel('$ \\alpha $')
     ax.set_ylabel('number of publications')
 
     plt.tight_layout()
