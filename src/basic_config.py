@@ -34,23 +34,25 @@ from collections import defaultdict
 from collections import Counter
 import matplotlib
 matplotlib.use('Agg')
+
 # from scipy.interpolate import spline
 lowess = sm.nonparametric.lowess
 
 # from skmisc.loess import loess
 
-
 # from gini import gini
 
-logging.basicConfig(
-    format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',
+                    level=logging.INFO)
 
 mpl.rcParams['agg.path.chunksize'] = 10000
 
-color_sequence = ['#1f77b4',   '#ffbb78', '#2ca02c',
-                  '#d62728', '#ff9896', '#9467bd',
-                  '#8c564b', '#e377c2', '#7f7f7f',
-                  '#bcbd22', '#dbdb8d', '#17becf', '#ff7f0e', '#aec7e8', '#9edae5', '#98df8a', '#c5b0d5', '#c49c94', '#f7b6d2', '#c7c7c7']
+color_sequence = [
+    '#1f77b4', '#ffbb78', '#2ca02c', '#d62728', '#ff9896', '#9467bd',
+    '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#dbdb8d', '#17becf',
+    '#ff7f0e', '#aec7e8', '#9edae5', '#98df8a', '#c5b0d5', '#c49c94',
+    '#f7b6d2', '#c7c7c7'
+]
 mpl.rcParams['axes.prop_cycle'] = cycler('color', color_sequence)
 
 # color = plt.cm.viridis(np.linspace(0.01,0.99,6)) # This returns RGBA; convert:
@@ -59,39 +61,49 @@ mpl.rcParams['axes.prop_cycle'] = cycler('color', color_sequence)
 
 # mpl.rcParams['axes.prop_cycle'] = cycler('color', hexcolor)
 
-
-params = {'legend.fontsize': 10,
-          'axes.labelsize': 15,
-          'axes.titlesize': 20,
-          'xtick.labelsize': 15,
-          'ytick.labelsize': 15}
+params = {
+    'legend.fontsize': 10,
+    'axes.labelsize': 15,
+    'axes.titlesize': 20,
+    'xtick.labelsize': 15,
+    'ytick.labelsize': 15
+}
 pylab.rcParams.update(params)
-
 
 # from paths import *
 
 
 def circle(ax, x, y, radius=0.15):
 
-    circle = Circle((x, y), radius, clip_on=False, zorder=10, linewidth=1,
-                    edgecolor='black', facecolor=(0, 0, 0, .0125),
+    circle = Circle((x, y),
+                    radius,
+                    clip_on=False,
+                    zorder=10,
+                    linewidth=1,
+                    edgecolor='black',
+                    facecolor=(0, 0, 0, .0125),
                     path_effects=[withStroke(linewidth=5, foreground='w')])
     ax.add_artist(circle)
 
 
 def power_low_func(x, a, b):
-    return b*(x**(-a))
+    return b * (x**(-a))
 
 
 def exponential_func(x, a, b):
-    return b*np.exp(-a*x)
+    return b * np.exp(-a * x)
 
 
 def square_x(x, a, b, c):
-  return a*pow(x, 2)+b*x+c
+    return a * pow(x, 2) + b * x + c
 
 
-def autolabel(rects, ax, total_count=None, step=1,):
+def autolabel(
+    rects,
+    ax,
+    total_count=None,
+    step=1,
+):
     """
     Attach a text label above each bar displaying its height
     """
@@ -100,25 +112,29 @@ def autolabel(rects, ax, total_count=None, step=1,):
         height = rect.get_height()
         # print height
         if not total_count is None:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.005*height,
-                    '{:}\n({:.6f})'.format(
-                        int(height), height/float(total_count)),
-                    ha='center', va='bottom')
+            ax.text(rect.get_x() + rect.get_width() / 2.,
+                    1.005 * height,
+                    '{:}\n({:.6f})'.format(int(height),
+                                           height / float(total_count)),
+                    ha='center',
+                    va='bottom')
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.005*height,
+            ax.text(rect.get_x() + rect.get_width() / 2.,
+                    1.005 * height,
                     '{:}'.format(int(height)),
-                    ha='center', va='bottom')
+                    ha='center',
+                    va='bottom')
 
 
 class dbop:
-
     def __init__(self, insert_index=0):
 
         self._insert_index = insert_index
         self._insert_values = []
         logging.debug("connect database with normal cursor.")
-        self._db = psycopg2.connect(
-            database='core_data', user="buyi", password="ruth_hardtop_isthmus_bubbly")
+        self._db = psycopg2.connect(database='core_data',
+                                    user="buyi",
+                                    password="ruth_hardtop_isthmus_bubbly")
         self._cursor = self._db.cursor()
 
     def query_database(self, sql):
@@ -138,8 +154,9 @@ class dbop:
     def batch_insert(self, sql, row, step, is_auto=True, end=False):
         if end:
             if len(self._insert_values) != 0:
-                logging.info("insert {:}th data into database,final insert.".format(
-                    self._insert_index))
+                logging.info(
+                    "insert {:}th data into database,final insert.".format(
+                        self._insert_index))
                 self.insert_database(sql, self._insert_values)
         else:
             self._insert_index += 1
@@ -323,7 +340,7 @@ def gini(array):
     # Values must be sorted:
     array = np.sort(array)
     # Index per array element:
-    index = np.arange(1, array.shape[0]+1)
+    index = np.arange(1, array.shape[0] + 1)
     # Number of array elements:
     n = array.shape[0]
     # Gini coefficient:
@@ -332,7 +349,7 @@ def gini(array):
 
 def loess_test():
 
-    x = np.linspace(0, 2*np.pi, 100).tolist()*100
+    x = np.linspace(0, 2 * np.pi, 100).tolist() * 100
 
     x = sorted(x)
     y = np.sin(x) + np.random.random(10000)
@@ -379,6 +396,7 @@ def loess_data(xs, ys):
     ul = conf.upper
 
     return pred_x, lowess, ll, ul
+
 
 ## use bootstrap method to cal mean and confidence interval
 
