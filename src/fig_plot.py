@@ -45,7 +45,7 @@ def plot_paper_relations():
 
     sns.despine()
 
-    ax.set_ylabel('$\alpha$')
+    ax.set_ylabel('$ \\alpha $')
     ax.set_xlabel('number of citations')
 
     plt.tight_layout()
