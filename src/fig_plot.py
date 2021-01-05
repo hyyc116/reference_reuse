@@ -88,6 +88,20 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     plt.savefig(f'fig/{label}_{attr}_N1_dis.png', dpi=800)
     logging.info(f'N1 dis saved to fig/{label}_{attr}_N1_dis.png')
 
+    fig, ax = plt.subplots(figsize=(5, 4))
+
+    sns.lineplot(data=data[data[f'{attr}'] > 0], x='N1', y='n1_yd', ax=ax)
+
+    sns.despine()
+
+    ax.set_xlabel('N1')
+    ax.set_ylabel('average year difference')
+
+    plt.tight_layout()
+
+    plt.savefig(f'fig/{label}__N1_yd_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_N1_yd_dis.png')
+
 
 if __name__ == "__main__":
     plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
