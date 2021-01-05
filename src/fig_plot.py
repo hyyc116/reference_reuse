@@ -88,4 +88,5 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
 
 if __name__ == "__main__":
-    plot_paper_relations()
+    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper')
+    plot_paper_relations('data/author_reuse_attrs.csv', 'author')
