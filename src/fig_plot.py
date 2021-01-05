@@ -16,7 +16,9 @@ import pandas as pd
 
 
 # 画属性随着时间的变化
-def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
+def plot_paper_relations(path='data/paper_reuse_attrs.csv',
+                         label='paper',
+                         attr='cn'):
 
     data = pd.read_csv(path)
     data = data[data['a'] != 0]
@@ -27,7 +29,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data['cn'] > 0], x='a', bins=50, ax=ax)
+    sns.histplot(data=data[data[f'{attr}'] > 0], x='a', bins=50, ax=ax)
 
     sns.despine()
 
@@ -41,7 +43,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data[data['cn'] > 0], x='cn', y='a', ax=ax)
+    sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y='a', ax=ax)
 
     sns.despine()
 
@@ -51,15 +53,15 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
     plt.tight_layout()
 
-    plt.savefig(f'fig/{label}_cn_a_dis.png', dpi=800)
-    logging.info(f'N1 dis saved to fig/{label}_cn_a_dis.png')
+    plt.savefig(f'fig/{label}f_{attr}_a_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}f_{attr}_a_dis.png')
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data['cn'] > 0], x='N1', bins=50, ax=ax)
+    sns.histplot(data=data[data[f'{attr}'] > 0], x='N1', bins=50, ax=ax)
 
     sns.despine()
 
@@ -73,7 +75,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data[data['cn'] > 0], x='cn', y='N1', ax=ax)
+    sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y='N1', ax=ax)
 
     sns.despine()
 
@@ -83,10 +85,10 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
     plt.tight_layout()
 
-    plt.savefig(f'fig/{label}_cn_N1_dis.png', dpi=800)
-    logging.info(f'N1 dis saved to fig/{label}_cn_N1_dis.png')
+    plt.savefig(f'fig/{label}_{attr}_N1_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_{attr}_N1_dis.png')
 
 
 if __name__ == "__main__":
-    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper')
-    plot_paper_relations('data/author_reuse_attrs.csv', 'author')
+    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
+    plot_paper_relations('data/author_reuse_attrs.csv', 'author', 'pn')
