@@ -27,7 +27,7 @@ def plot_paper_relations():
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data, x='a', bins=50, ax=ax)
+    sns.histplot(data=data[data['cn'] > 0], x='a', bins=50, ax=ax)
 
     sns.despine()
 
@@ -41,12 +41,13 @@ def plot_paper_relations():
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data, x='cn', y='a', ax=ax)
+    sns.lineplot(data=data[data['cn'] > 0], x='cn', y='a', ax=ax)
 
     sns.despine()
 
     ax.set_ylabel('$ \\alpha $')
     ax.set_xlabel('number of citations')
+    ax.set_xscale('log')
 
     plt.tight_layout()
 
@@ -58,7 +59,7 @@ def plot_paper_relations():
     # 对所关注的属性都进行分布画线
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data, x='N1', bins=50, ax=ax)
+    sns.histplot(data=data[data['cn'] > 0], x='N1', bins=50, ax=ax)
 
     sns.despine()
 
@@ -72,12 +73,15 @@ def plot_paper_relations():
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data, x='cn', y='N1', ax=ax)
+    sns.lineplot(data=data[data['cn'] > 0], x='cn', y='N1', ax=ax)
 
     sns.despine()
 
     ax.set_ylabel('N1')
     ax.set_xlabel('number of citations')
+    ax.set_xscale('log')
+
+    plt.tight_layout()
 
     plt.savefig('fig/cn_N1_dis.png', dpi=800)
     logging.info('N1 dis saved to fig/cn_N1_dis.png')
