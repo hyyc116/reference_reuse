@@ -16,9 +16,9 @@ import pandas as pd
 
 
 # 画属性随着时间的变化
-def plot_paper_relations():
+def plot_paper_relations(path='data/paper_reuse_attrs.csv', label='paper'):
 
-    data = pd.read_csv('data/paper_reuse_attrs.csv')
+    data = pd.read_csv(path)
     data = data[data['a'] != 0]
     data = data[data['a'] < 15]
     data = data[data['N1'] < 100]
@@ -36,8 +36,8 @@ def plot_paper_relations():
 
     plt.tight_layout()
 
-    plt.savefig('fig/a_dis.png', dpi=800)
-    logging.info('N1 dis saved to fig/a_dis.png')
+    plt.savefig(f'fig/{label}_a_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_a_dis.png')
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
@@ -51,8 +51,8 @@ def plot_paper_relations():
 
     plt.tight_layout()
 
-    plt.savefig('fig/cn_a_dis.png', dpi=800)
-    logging.info('N1 dis saved to fig/cn_a_dis.png')
+    plt.savefig(f'fig/{label}_cn_a_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_cn_a_dis.png')
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
@@ -68,8 +68,8 @@ def plot_paper_relations():
 
     plt.tight_layout()
 
-    plt.savefig('fig/N1_dis.png', dpi=800)
-    logging.info('N1 dis saved to fig/N1_dis.png')
+    plt.savefig(f'fig/{label}_N1_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_N1_dis.png')
 
     fig, ax = plt.subplots(figsize=(5, 4))
 
@@ -83,8 +83,8 @@ def plot_paper_relations():
 
     plt.tight_layout()
 
-    plt.savefig('fig/cn_N1_dis.png', dpi=800)
-    logging.info('N1 dis saved to fig/cn_N1_dis.png')
+    plt.savefig(f'fig/{label}_cn_N1_dis.png', dpi=800)
+    logging.info(f'N1 dis saved to fig/{label}_cn_N1_dis.png')
 
 
 if __name__ == "__main__":
