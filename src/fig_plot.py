@@ -25,7 +25,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     data = data[data['a'] < 15]
     data = data[data['N1'] < 100]
 
-    data = data[data[f'attr'] > 0]
+    data = data[data[f'{attr}'] > 0]
 
     plot_attr(data, attr, label, 'a', '\\alpha')
     plot_attr(data, attr, label, 'N1', 'N1')
