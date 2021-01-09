@@ -25,10 +25,18 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     data = data[data['a'] < 15]
     data = data[data['N1'] < 100]
 
+    data = data[data[f'attr'] > 0]
+
     plot_attr(data, attr, label, 'a', '\\alpha')
     plot_attr(data, attr, label, 'N1', 'N1')
     plot_attr(data, attr, label, 'max_num', 'max num')
+    plot_attr(data, attr, label, 'max_sc', 'max sc')
+
     # plot_attr(data, attr, label, 'sc_num_avg', 'SCN')
+
+
+def plot_sc(data, attr, label):
+    pass
 
 
 def plot_attr(data, attr, label, index, index_label):
@@ -78,7 +86,7 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.lineplot(data=data[data[f'{attr}'] > 0],
                  x=index,
-                 y='{index}_yd',
+                 y=f'{str(index).lower()}_yd',
                  ax=ax)
 
     sns.despine()
