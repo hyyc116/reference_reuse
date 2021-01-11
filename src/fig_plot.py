@@ -30,7 +30,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     plot_attr(data, attr, label, 'a', '\\alpha')
     plot_attr(data, attr, label, 'N1', 'N1')
     plot_attr(data, attr, label, 'max_num', 'max num')
-    plot_attr(data, attr, label, 'max_sc', 'max sc')
+    # plot_attr(data, attr, label, 'max_sc', 'max sc')
 
     # plot_attr(data, attr, label, 'sc_num_avg', 'SCN')
 
@@ -46,7 +46,11 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data[f'{attr}'] > 0], x=index, bins=50, ax=ax)
+    sns.histplot(data=data[data[f'{attr}'] > 0],
+                 x=index,
+                 bins=20,
+                 ax=ax,
+                 kde=True)
 
     sns.despine()
 
@@ -61,7 +65,14 @@ def plot_attr(data, attr, label, index, index_label):
     #  index 属性随着attr的变化
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
+    newdata = data.groupby(f'{attr}').agg('mean')
+
+    xs = newdata[f'{attr}']
+    ys = newdata[index]
+
+    # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
+    xs, ys = moving_average(xs, ys, 2, True)
+    ax.plot(xs, ys)
 
     sns.despine()
 
@@ -84,10 +95,18 @@ def plot_attr(data, attr, label, index, index_label):
     # 该属性的最大最小值
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    sns.lineplot(data=data[data[f'{attr}'] > 0],
-                 x=index,
-                 y=f'{str(index).lower()}_yd',
-                 ax=ax)
+    # sns.lineplot(data=data[data[f'{attr}'] > 0],
+    #              x=index,
+    #              y=f'{str(index).lower()}_yd',
+    #              ax=ax)
+    newdata = data.groupby(index).agg('mean')
+
+    xs = newdata[index]
+    ys = newdata[f'{str(index).lower()}_yd']
+
+    # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
+    xs, ys = moving_average(xs, ys, 2, True)
+    ax.plot(xs, ys)
 
     sns.despine()
 
@@ -98,6 +117,32 @@ def plot_attr(data, attr, label, index, index_label):
 
     plt.savefig(f'fig/{label}_{str(index).lower()}_yd_dis.png', dpi=800)
     logging.info(f'N1 dis saved to fig/{label}_{index}_yd_dis.png')
+
+
+# moving average 是否需要进行log
+#  1 2 3 4 5 6  根据window的大小 向右平均
+#  1000 2000 3000 4000 这种取log时，np.log()
+def moving_average(xs, ys, window, logX=False):
+
+    min_x = np.min(xs)
+    max_x = np.max(xs)
+    if logX:
+        window_x = np.log(xs)
+    else:
+        window_x = xs
+    smooth_ys = []
+    smooth_xs = []
+    for i, x in enumerate(window_x):
+
+        up = x + window
+        down = x - window
+
+        avg_y = np.mean(np.where((x > down) & (x < up)))
+
+        smooth_xs.append(xs[i])
+        smooth_ys.append(avg_y)
+
+    return smooth_xs, smooth_ys
 
 
 if __name__ == "__main__":
