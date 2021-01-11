@@ -66,9 +66,9 @@ def plot_attr(data, attr, label, index, index_label):
     fig, ax = plt.subplots(figsize=(5, 4))
 
     newdata = data.groupby(f'{attr}').agg('mean')
-    print(newdata.index.tolist())
+    # print(newdata.index.tolist())
 
-    xs = newdata[f'{attr}']
+    xs = newdata.index
     ys = newdata[index]
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
@@ -102,7 +102,7 @@ def plot_attr(data, attr, label, index, index_label):
     #              ax=ax)
     newdata = data.groupby(index).agg('mean')
 
-    xs = newdata[index]
+    xs = newdata.index
     ys = newdata[f'{str(index).lower()}_yd']
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
