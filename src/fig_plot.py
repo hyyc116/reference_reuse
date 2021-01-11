@@ -135,13 +135,8 @@ def moving_average(xs, ys, window, logX=False):
     smooth_xs = []
     for i, x in enumerate(window_x):
 
-        up = x + window
-        down = x - window
-
-        avg_y = np.mean(np.where((x > down) & (x < up)))
-
-        smooth_xs.append(xs[i])
-        smooth_ys.append(avg_y)
+        smooth_xs.append(x)
+        smooth_ys.append(np.mean(ys[:i + 1]))
 
     return smooth_xs, smooth_ys
 
