@@ -66,7 +66,7 @@ def plot_attr(data, attr, label, index, index_label):
     fig, ax = plt.subplots(figsize=(5, 4))
 
     newdata = data.groupby(f'{attr}').agg('mean')
-    print(newdata.head())
+    print(newdata.index().tolist())
 
     xs = newdata[f'{attr}']
     ys = newdata[index]
