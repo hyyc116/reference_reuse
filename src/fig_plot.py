@@ -72,7 +72,7 @@ def plot_attr(data, attr, label, index, index_label):
     ys = newdata[index]
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
-    xs, ys = moving_average(xs, ys, 2, True)
+    xs, ys = moving_average(xs, ys, 0.5, True)
     ax.plot(xs, ys)
 
     sns.despine()
@@ -106,7 +106,7 @@ def plot_attr(data, attr, label, index, index_label):
     ys = newdata[f'{str(index).lower()}_yd']
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
-    xs, ys = moving_average(xs, ys, 2, True)
+    xs, ys = moving_average(xs, ys, 5, False)
     ax.plot(xs, ys)
 
     sns.despine()
