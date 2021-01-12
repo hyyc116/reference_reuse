@@ -110,7 +110,7 @@ def plot_attr(data, attr, label, index, index_label):
     plt.savefig(f'fig/{label}_{attr}_{index}_dis.png', dpi=800)
     logging.info(f'N1 dis saved to fig/{label}_{attr}_{index}_dis.png')
 
-    if index == 'a':
+    if index == 'a' or index == 'SCR':
         return
 
     # 该属性的最大最小值
