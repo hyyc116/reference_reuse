@@ -63,7 +63,8 @@ def plot_attr(data, attr, label, index, index_label):
                  bins=50,
                  ax=ax,
                  kde=False,
-                 color=color)
+                 color=color,
+                 stat='probability')
 
     sns.despine()
 
