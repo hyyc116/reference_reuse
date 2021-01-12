@@ -23,6 +23,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     data = pd.read_csv(path)
     data = data[data['a'] != 0]
     data = data[data['a'] < 12]
+
     data['a'] = -data['a']
     data = data[data['N1'] < 40]
     if attr == 'cn':
@@ -77,14 +78,14 @@ def plot_attr(data, attr, label, index, index_label):
     #  index 属性随着attr的变化
     fig, ax = plt.subplots(figsize=(5, 4))
 
-    # newdata = data.groupby(f'{attr}').agg('mean')
+    newdata = data.groupby(f'{attr}').agg('mean')
     # # print(newdata.index.tolist())
 
-    # xs = newdata.index
-    # ys = newdata[index]
+    xs = newdata.index
+    ys = newdata[index]
 
     # sns.lineplot(data=data, x=f'{attr}', y=index, ax=ax, color=color)
-    xs, ys = moving_average(data[f'{attr}'], data[index], 0.5, True)
+    xs, ys = moving_average(xs, ys, 0.5, True)
     # ax.plot(xs, ys,color=)
 
     ax.plot(xs, ys, color=color)
@@ -114,13 +115,13 @@ def plot_attr(data, attr, label, index, index_label):
     #              x=index,
     #              y=f'{str(index).lower()}_yd',
     #              ax=ax)
-    # newdata = data.groupby(index).agg('mean')
+    newdata = data.groupby(index).agg('mean')
 
-    # xs = newdata.index
-    # ys = newdata[f'{str(index).lower()}_yd']
+    xs = newdata.index
+    ys = newdata[f'{str(index).lower()}_yd']
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
-    xs, ys = moving_average(data[f'{attr}'], data[index], 5, False)
+    xs, ys = moving_average(xs, ys, 5, False)
     ax.plot(xs, ys, color=color)
 
     sns.despine()
