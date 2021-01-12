@@ -41,6 +41,12 @@ def plot_sc(data, attr, label):
 
 def plot_attr(data, attr, label, index, index_label):
 
+    color = None
+    if label == 'paper':
+        color = sns.color_palette()[1]
+    elif label == 'author':
+        color = sns.color_palette()[0]
+
     # index 属性分布
     fig, ax = plt.subplots(figsize=(5, 4))
 
@@ -50,7 +56,8 @@ def plot_attr(data, attr, label, index, index_label):
                  x=index,
                  bins=50,
                  ax=ax,
-                 kde=False)
+                 kde=False,
+                 color=color)
 
     sns.despine()
 
@@ -71,9 +78,11 @@ def plot_attr(data, attr, label, index, index_label):
     xs = newdata.index
     ys = newdata[index]
 
-    # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
+    # sns.lineplot(data=data, x=f'{attr}', y=index, ax=ax, color=color)
     xs, ys = moving_average(xs, ys, 0.5, True)
-    ax.plot(xs, ys)
+    # ax.plot(xs, ys,color=)
+
+    ax.plot(xs, ys, color=color)
 
     sns.despine()
 
@@ -107,7 +116,7 @@ def plot_attr(data, attr, label, index, index_label):
 
     # sns.lineplot(data=data[data[f'{attr}'] > 0], x=f'{attr}', y=index, ax=ax)
     xs, ys = moving_average(xs, ys, 5, False)
-    ax.plot(xs, ys)
+    ax.plot(xs, ys, color=color)
 
     sns.despine()
 
@@ -140,7 +149,9 @@ def moving_average(xs, ys, window, logX=False):
 
     # return smooth_xs, smooth_ys
 
-    return xs, ys
+    z = lowess(ys, xs, frac=0.02)
+
+    return z[:, 0], z[:, 1]
 
 
 if __name__ == "__main__":
