@@ -125,20 +125,22 @@ def plot_attr(data, attr, label, index, index_label):
 #  1000 2000 3000 4000 这种取log时，np.log()
 def moving_average(xs, ys, window, logX=False):
 
-    min_x = np.min(xs)
-    max_x = np.max(xs)
-    if logX:
-        window_x = np.log(xs)
-    else:
-        window_x = xs
-    smooth_ys = []
-    smooth_xs = []
-    for i, x in enumerate(window_x):
+    # min_x = np.min(xs)
+    # max_x = np.max(xs)
+    # if logX:
+    #     window_x = np.log(xs)
+    # else:
+    #     window_x = xs
+    # smooth_ys = []
+    # smooth_xs = []
+    # for i, x in enumerate(window_x):
 
-        smooth_xs.append(x)
-        smooth_ys.append(np.mean(ys[:i + 1]))
+    #     smooth_xs.append(x)
+    #     smooth_ys.append(np.mean(ys[:i + 1]))
 
-    return smooth_xs, smooth_ys
+    # return smooth_xs, smooth_ys
+
+    return xs, ys
 
 
 if __name__ == "__main__":
