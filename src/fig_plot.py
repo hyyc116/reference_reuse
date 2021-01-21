@@ -62,9 +62,9 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.set_theme(style='ticks')
 
-    if attr == 'N1':
+    if index == 'N1':
 
-        attr_data = Counter(data[f'{attr}'])
+        attr_data = Counter(data[index])
 
         xs = []
         ys = []
