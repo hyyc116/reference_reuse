@@ -88,7 +88,7 @@ def plot_attr(data, attr, label, index, index_label):
         ax.plot([mean] * 10,
                 np.linspace(0, 0.2, 10),
                 '--',
-                label='mean',
+                label='mean:{:.2f}'.format(mean),
                 c='r')
 
         ax.legend()
