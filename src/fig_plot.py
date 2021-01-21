@@ -84,6 +84,15 @@ def plot_attr(data, attr, label, index, index_label):
                      color=color,
                      stat='probability')
 
+        mean = np.mean(data[index])
+        ax.plot([mean] * 10,
+                np.linspace(0, 0.2, 10),
+                '--',
+                label='mean',
+                c='r')
+
+        ax.legend()
+
     sns.despine()
 
     ax.set_xlabel(index_label)
