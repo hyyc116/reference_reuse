@@ -62,13 +62,27 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.set_theme(style='ticks')
 
-    sns.histplot(data=data[data[f'{attr}'] > 0],
-                 x=index,
-                 bins=50,
-                 ax=ax,
-                 kde=False,
-                 color=color,
-                 stat='probability')
+    if attr == 'N1':
+
+        attr_data = Counter(data[f'{attr}'])
+
+        xs = []
+        ys = []
+        for key in sorted(attr_data.keys()):
+            xs.append(key)
+            ys.append(attr_data[key])
+
+        ax.plot(xs, ys)
+        ax.set_xscale('log')
+
+    else:
+        sns.histplot(data=data[data[f'{attr}'] > 0],
+                     x=index,
+                     bins=50,
+                     ax=ax,
+                     kde=False,
+                     color=color,
+                     stat='probability')
 
     sns.despine()
 
