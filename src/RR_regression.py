@@ -8,7 +8,9 @@ import pandas as pd
 # 几个指标的回归分析
 def regress_RR_author():
 
-    data = pd.read_csv('data/author_reuse_attrs.txt')
+    data = pd.read_csv('data/author_reuse_attrs.csv')
+
+    data = data[data['pn'] > 4]
 
     # 确定回归的自变量和因变量
     formula = 'N1 ~ pn + max_num + max_num_yd'
