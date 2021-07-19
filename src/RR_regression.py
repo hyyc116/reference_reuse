@@ -14,10 +14,14 @@ def regress_RR_author(ata='author'):
 
     data = pd.read_csv(f'data/{ata}_reuse_attrs.csv')
 
-    data = data[data['pn'] > 4]
+    if ata == 'author':
+        attr = 'pn'
+    else:
+        attr = 'cn'
+
+    data = data[data[attr] > 5]
 
     lefts = ['N1', 'a']
-    rights = ['pn', 'SQUARE(pn)', 'n1_yd' + 'max_sc_num']
 
     lines = []
     for left in lefts:
@@ -25,47 +29,47 @@ def regress_RR_author(ata='author'):
         formula = left + ' ~ '
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ pn'
+        formula = f'{left} ~ {attr}'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE(pn)'
+        formula = f'{left} ~ SQUARE({attr})'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ pn + n1_yd'
+        formula = f'{left} ~ {attr} + n1_yd'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ pn + max_sc_num'
+        formula = f'{left} ~ {attr} + max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE(pn) + n1_yd'
+        formula = f'{left} ~ SQUARE({attr}) + n1_yd'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE(pn) + max_sc_num'
+        formula = f'{left} ~ SQUARE({attr}) + max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ pn + n1_yd +max_sc_num'
+        formula = f'{left} ~ {attr} + n1_yd +max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE(pn) + n1_yd +max_sc_num'
+        formula = f'{left} ~ SQUARE({attr}) + n1_yd +max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE(pn) +pn + n1_yd +max_sc_num'
+        formula = f'{left} ~ SQUARE({attr}) +pn + n1_yd +max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
