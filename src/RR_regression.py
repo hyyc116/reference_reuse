@@ -27,12 +27,32 @@ def regress_RR_author():
     print('\n'.join(formulate_ols(data, formula)))
 
     # 确定回归的自变量和因变量
+    formula = 'N1 ~ SQUARE(pn)'
+
+    print('\n'.join(formulate_ols(data, formula)))
+
+    # 确定回归的自变量和因变量
     formula = 'N1 ~ pn + n1_yd'
 
     print('\n'.join(formulate_ols(data, formula)))
 
     # 确定回归的自变量和因变量
     formula = 'N1 ~ pn + max_sc_num'
+
+    print('\n'.join(formulate_ols(data, formula)))
+
+    # 确定回归的自变量和因变量
+    formula = 'N1 ~ SQUARE(pn) + n1_yd'
+
+    print('\n'.join(formulate_ols(data, formula)))
+
+    # 确定回归的自变量和因变量
+    formula = 'N1 ~ SQUARE(pn) + max_sc_num'
+
+    print('\n'.join(formulate_ols(data, formula)))
+
+    # 确定回归的自变量和因变量
+    formula = 'N1 ~ SQUARE(pn) +pn + n1_yd +max_sc_num'
 
     print('\n'.join(formulate_ols(data, formula)))
 
