@@ -10,51 +10,68 @@ def SQUARE(x):
 
 
 # 几个指标的回归分析
-def regress_RR_author():
+def regress_RR_author(ata='author'):
 
-    data = pd.read_csv('data/author_reuse_attrs.csv')
+    data = pd.read_csv(f'data/{ata}_reuse_attrs.csv')
 
     data = data[data['pn'] > 4]
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ pn + n1_yd +max_sc_num'
+    lefts = ['N1', 'a']
+    rights = ['pn', 'SQUARE(pn)', 'n1_yd' + 'max_sc_num']
 
-    print('\n'.join(formulate_ols(data, formula)))
+    lines = []
+    for left in lefts:
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ pn'
+        formula = left + ' ~ '
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ pn'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ SQUARE(pn)'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ SQUARE(pn)'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ pn + n1_yd'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ pn + n1_yd'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ pn + max_sc_num'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ pn + max_sc_num'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ SQUARE(pn) + n1_yd'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ SQUARE(pn) + n1_yd'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ SQUARE(pn) + max_sc_num'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ SQUARE(pn) + max_sc_num'
 
-    # 确定回归的自变量和因变量
-    formula = 'N1 ~ SQUARE(pn) +pn + n1_yd +max_sc_num'
+        lines.append('\n'.join(formulate_ols(data, formula)))
 
-    print('\n'.join(formulate_ols(data, formula)))
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ pn + n1_yd +max_sc_num'
+
+        lines.append('\n'.join(formulate_ols(data, formula)))
+
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ SQUARE(pn) + n1_yd +max_sc_num'
+
+        lines.append('\n'.join(formulate_ols(data, formula)))
+
+        # 确定回归的自变量和因变量
+        formula = f'{left} ~ SQUARE(pn) +pn + n1_yd +max_sc_num'
+
+        lines.append('\n'.join(formulate_ols(data, formula)))
+
+        open(f'data/{ata}_{left}_regression.txt', 'w').write('\n'.join(lines))
+
+        logging.info(f'data saved to data/{ata}_{left}_regression.txt')
 
 
 def formulate_ols(data, formula):
@@ -74,4 +91,6 @@ def formulate_ols(data, formula):
 
 
 if __name__ == '__main__':
-    regress_RR_author()
+    regress_RR_author('author')
+
+    regress_RR_author('paper')
