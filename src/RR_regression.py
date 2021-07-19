@@ -13,7 +13,7 @@ def regress_RR_author():
     data = data[data['pn'] > 4]
 
     # 确定回归的自变量和因变量
-    formula = 'N1 ~ pn + max_num + max_num_yd'
+    formula = 'N1 ~ pn + N1_yd +max_sc_num'
 
     print('\n'.join(formulate_ols(data, formula)))
 
