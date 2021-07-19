@@ -8,7 +8,7 @@ Dep. Variable:                     N1   R-squared:                       0.019
 Model:                            OLS   Adj. R-squared:                  0.019
 Method:                 Least Squares   F-statistic:                 2.525e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:05   Log-Likelihood:            -4.5525e+07
+Time:                        05:22:02   Log-Likelihood:            -4.5525e+07
 No. Observations:            13195592   AIC:                         9.105e+07
 Df Residuals:                13195590   BIC:                         9.105e+07
 Df Model:                           1                                         
@@ -37,7 +37,7 @@ Dep. Variable:                     N1   R-squared:                       0.001
 Model:                            OLS   Adj. R-squared:                  0.001
 Method:                 Least Squares   F-statistic:                     7284.
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:08   Log-Likelihood:            -4.5646e+07
+Time:                        05:22:06   Log-Likelihood:            -4.5646e+07
 No. Observations:            13195592   AIC:                         9.129e+07
 Df Residuals:                13195590   BIC:                         9.129e+07
 Df Model:                           1                                         
@@ -68,7 +68,7 @@ Dep. Variable:                     N1   R-squared:                       0.036
 Model:                            OLS   Adj. R-squared:                  0.036
 Method:                 Least Squares   F-statistic:                 2.487e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:14   Log-Likelihood:            -4.5406e+07
+Time:                        05:22:11   Log-Likelihood:            -4.5406e+07
 No. Observations:            13195592   AIC:                         9.081e+07
 Df Residuals:                13195589   BIC:                         9.081e+07
 Df Model:                           2                                         
@@ -98,7 +98,7 @@ Dep. Variable:                     N1   R-squared:                       0.046
 Model:                            OLS   Adj. R-squared:                  0.046
 Method:                 Least Squares   F-statistic:                 3.193e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:19   Log-Likelihood:            -4.5338e+07
+Time:                        05:22:16   Log-Likelihood:            -4.5338e+07
 No. Observations:            13195592   AIC:                         9.068e+07
 Df Residuals:                13195589   BIC:                         9.068e+07
 Df Model:                           2                                         
@@ -128,7 +128,7 @@ Dep. Variable:                     N1   R-squared:                       0.024
 Model:                            OLS   Adj. R-squared:                  0.024
 Method:                 Least Squares   F-statistic:                 1.636e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:24   Log-Likelihood:            -4.5488e+07
+Time:                        05:22:21   Log-Likelihood:            -4.5488e+07
 No. Observations:            13195592   AIC:                         9.098e+07
 Df Residuals:                13195589   BIC:                         9.098e+07
 Df Model:                           2                                         
@@ -160,7 +160,7 @@ Dep. Variable:                     N1   R-squared:                       0.036
 Model:                            OLS   Adj. R-squared:                  0.036
 Method:                 Least Squares   F-statistic:                 2.482e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:30   Log-Likelihood:            -4.5406e+07
+Time:                        05:22:26   Log-Likelihood:            -4.5406e+07
 No. Observations:            13195592   AIC:                         9.081e+07
 Df Residuals:                13195589   BIC:                         9.081e+07
 Df Model:                           2                                         
@@ -192,7 +192,7 @@ Dep. Variable:                     N1   R-squared:                       0.055
 Model:                            OLS   Adj. R-squared:                  0.055
 Method:                 Least Squares   F-statistic:                 2.561e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:36   Log-Likelihood:            -4.5277e+07
+Time:                        05:22:32   Log-Likelihood:            -4.5277e+07
 No. Observations:            13195592   AIC:                         9.055e+07
 Df Residuals:                13195588   BIC:                         9.055e+07
 Df Model:                           3                                         
@@ -223,7 +223,7 @@ Dep. Variable:                     N1   R-squared:                       0.047
 Model:                            OLS   Adj. R-squared:                  0.047
 Method:                 Least Squares   F-statistic:                 2.191e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:43   Log-Likelihood:            -4.5329e+07
+Time:                        05:22:38   Log-Likelihood:            -4.5329e+07
 No. Observations:            13195592   AIC:                         9.066e+07
 Df Residuals:                13195588   BIC:                         9.066e+07
 Df Model:                           3                                         
@@ -256,7 +256,7 @@ Dep. Variable:                     N1   R-squared:                       0.057
 Model:                            OLS   Adj. R-squared:                  0.057
 Method:                 Least Squares   F-statistic:                 1.979e+05
 Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
-Time:                        05:15:51   Log-Likelihood:            -4.5265e+07
+Time:                        05:22:45   Log-Likelihood:            -4.5265e+07
 No. Observations:            13195592   AIC:                         9.053e+07
 Df Residuals:                13195587   BIC:                         9.053e+07
 Df Model:                           4                                         
