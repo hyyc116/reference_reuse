@@ -1,0 +1,282 @@
+
+
+----------------------------------------------------
+formula:N1 ~ cn
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.019
+Model:                            OLS   Adj. R-squared:                  0.019
+Method:                 Least Squares   F-statistic:                 2.525e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:05   Log-Likelihood:            -4.5525e+07
+No. Observations:            13195592   AIC:                         9.105e+07
+Df Residuals:                13195590   BIC:                         9.105e+07
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.2516      0.002   1016.936      0.000       2.247       2.256
+cn             0.0079   1.58e-05    502.457      0.000       0.008       0.008
+==================================================================================
+Omnibus:                 90552213.667   Durbin-Watson:                       1.950
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   263214534105495360.000
+Skew:                         721.514   Prob(JB):                             0.00
+Kurtosis:                  691905.931   Cond. No.                             148.
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+----------------------------------------------------
+formula:N1 ~ SQUARE(cn)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.001
+Model:                            OLS   Adj. R-squared:                  0.001
+Method:                 Least Squares   F-statistic:                     7284.
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:08   Log-Likelihood:            -4.5646e+07
+No. Observations:            13195592   AIC:                         9.129e+07
+Df Residuals:                13195590   BIC:                         9.129e+07
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.6055      0.002   1230.339      0.000       2.601       2.610
+SQUARE(cn)  6.257e-08   7.33e-10     85.349      0.000    6.11e-08     6.4e-08
+==================================================================================
+Omnibus:                 90447824.511   Durbin-Watson:                       1.938
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   259643953776494048.000
+Skew:                         718.102   Prob(JB):                             0.00
+Kurtosis:                  687196.970   Cond. No.                         2.89e+06
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.89e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+
+----------------------------------------------------
+formula:N1 ~ cn + n1_yd
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.036
+Model:                            OLS   Adj. R-squared:                  0.036
+Method:                 Least Squares   F-statistic:                 2.487e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:14   Log-Likelihood:            -4.5406e+07
+No. Observations:            13195592   AIC:                         9.081e+07
+Df Residuals:                13195589   BIC:                         9.081e+07
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.5619      0.003    599.249      0.000       1.557       1.567
+cn             0.0066   1.59e-05    415.711      0.000       0.007       0.007
+n1_yd          0.3930      0.001    490.300      0.000       0.391       0.395
+==================================================================================
+Omnibus:                 91246776.543   Durbin-Watson:                       1.964
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   286195473769886688.000
+Skew:                         744.584   Prob(JB):                             0.00
+Kurtosis:                  721478.581   Cond. No.                             178.
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+----------------------------------------------------
+formula:N1 ~ cn + max_sc_num
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.046
+Model:                            OLS   Adj. R-squared:                  0.046
+Method:                 Least Squares   F-statistic:                 3.193e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:19   Log-Likelihood:            -4.5338e+07
+No. Observations:            13195592   AIC:                         9.068e+07
+Df Residuals:                13195589   BIC:                         9.068e+07
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.7975      0.002    780.042      0.000       1.793       1.802
+cn             0.0060   1.59e-05    377.714      0.000       0.006       0.006
+max_sc_num     0.3765      0.001    615.574      0.000       0.375       0.378
+==================================================================================
+Omnibus:                 91296182.133   Durbin-Watson:                       1.966
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   296303065505484416.000
+Skew:                         746.215   Prob(JB):                             0.00
+Kurtosis:                  734108.294   Cond. No.                             157.
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+----------------------------------------------------
+formula:N1 ~ SQUARE(cn) + n1_yd
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.024
+Model:                            OLS   Adj. R-squared:                  0.024
+Method:                 Least Squares   F-statistic:                 1.636e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:24   Log-Likelihood:            -4.5488e+07
+No. Observations:            13195592   AIC:                         9.098e+07
+Df Residuals:                13195589   BIC:                         9.098e+07
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.7488      0.003    676.927      0.000       1.744       1.754
+SQUARE(cn)  5.863e-08   7.24e-10     80.934      0.000    5.72e-08       6e-08
+n1_yd          0.4494      0.001    565.413      0.000       0.448       0.451
+==================================================================================
+Omnibus:                 91247824.631   Durbin-Watson:                       1.959
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   286040570534188256.000
+Skew:                         744.620   Prob(JB):                             0.00
+Kurtosis:                  721283.305   Cond. No.                         3.63e+06
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.63e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+
+----------------------------------------------------
+formula:N1 ~ SQUARE(cn) + max_sc_num
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.036
+Model:                            OLS   Adj. R-squared:                  0.036
+Method:                 Least Squares   F-statistic:                 2.482e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:30   Log-Likelihood:            -4.5406e+07
+No. Observations:            13195592   AIC:                         9.081e+07
+Df Residuals:                13195589   BIC:                         9.081e+07
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.0005      0.002    888.119      0.000       1.996       2.005
+SQUARE(cn)  5.318e-08    7.2e-10     73.865      0.000    5.18e-08    5.46e-08
+max_sc_num     0.4214      0.001    699.125      0.000       0.420       0.423
+==================================================================================
+Omnibus:                 91306496.196   Durbin-Watson:                       1.962
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   297235586274546496.000
+Skew:                         746.561   Prob(JB):                             0.00
+Kurtosis:                  735262.573   Cond. No.                         3.15e+06
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.15e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+
+----------------------------------------------------
+formula:N1 ~ cn + n1_yd +max_sc_num
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.055
+Model:                            OLS   Adj. R-squared:                  0.055
+Method:                 Least Squares   F-statistic:                 2.561e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:36   Log-Likelihood:            -4.5277e+07
+No. Observations:            13195592   AIC:                         9.055e+07
+Df Residuals:                13195588   BIC:                         9.055e+07
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.3583      0.003    520.083      0.000       1.353       1.363
+cn             0.0053   1.59e-05    333.104      0.000       0.005       0.005
+n1_yd          0.2883      0.001    351.619      0.000       0.287       0.290
+max_sc_num     0.3212      0.001    510.852      0.000       0.320       0.322
+==================================================================================
+Omnibus:                 91692157.333   Durbin-Watson:                       1.971
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   309667308092590848.000
+Skew:                         759.683   Prob(JB):                             0.00
+Kurtosis:                  750481.009   Cond. No.                             180.
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+----------------------------------------------------
+formula:N1 ~ SQUARE(cn) + n1_yd +max_sc_num
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.047
+Model:                            OLS   Adj. R-squared:                  0.047
+Method:                 Least Squares   F-statistic:                 2.191e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:43   Log-Likelihood:            -4.5329e+07
+No. Observations:            13195592   AIC:                         9.066e+07
+Df Residuals:                13195588   BIC:                         9.066e+07
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.4841      0.003    571.968      0.000       1.479       1.489
+SQUARE(cn)  5.186e-08   7.16e-10     72.459      0.000    5.05e-08    5.33e-08
+n1_yd          0.3217      0.001    393.914      0.000       0.320       0.323
+max_sc_num     0.3538      0.001    567.621      0.000       0.353       0.355
+==================================================================================
+Omnibus:                 91739454.781   Durbin-Watson:                       1.969
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   311878788442660544.000
+Skew:                         761.303   Prob(JB):                             0.00
+Kurtosis:                  753156.005   Cond. No.                         3.68e+06
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.68e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+
+----------------------------------------------------
+formula:N1 ~ SQUARE(cn) +cn + n1_yd +max_sc_num
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     N1   R-squared:                       0.057
+Model:                            OLS   Adj. R-squared:                  0.057
+Method:                 Least Squares   F-statistic:                 1.979e+05
+Date:                Mon, 19 Jul 2021   Prob (F-statistic):               0.00
+Time:                        05:15:51   Log-Likelihood:            -4.5265e+07
+No. Observations:            13195592   AIC:                         9.053e+07
+Df Residuals:                13195587   BIC:                         9.053e+07
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      1.3168      0.003    501.761      0.000       1.312       1.322
+SQUARE(cn) -1.304e-07   8.76e-10   -148.944      0.000   -1.32e-07   -1.29e-07
+cn             0.0070   1.96e-05    357.810      0.000       0.007       0.007
+n1_yd          0.2782      0.001    338.437      0.000       0.277       0.280
+max_sc_num     0.3124      0.001    495.158      0.000       0.311       0.314
+==================================================================================
+Omnibus:                 91706720.012   Durbin-Watson:                       1.971
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):   310211940225238848.000
+Skew:                         760.182   Prob(JB):                             0.00
+Kurtosis:                  751140.677   Cond. No.                         3.73e+06
+==================================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.73e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
