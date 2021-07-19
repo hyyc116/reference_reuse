@@ -15,7 +15,7 @@ def regress_RR_author():
     # 确定回归的自变量和因变量
     formula = 'N1 ~ pn + max_num + max_num_yd'
 
-    formulate_ols(data, formula)
+    print(formulate_ols(data, formula))
 
 
 def formulate_ols(data, formula):
