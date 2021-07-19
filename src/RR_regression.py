@@ -23,8 +23,9 @@ def regress_RR_author(ata='author'):
 
     lefts = ['N1', 'a']
 
-    lines = []
     for left in lefts:
+
+        lines = []
 
         formula = left + ' ~ '
 
@@ -95,6 +96,6 @@ def formulate_ols(data, formula):
 
 
 if __name__ == '__main__':
-    # regress_RR_author('author')
+    regress_RR_author('author')
 
     regress_RR_author('paper')
