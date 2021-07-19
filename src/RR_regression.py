@@ -69,7 +69,7 @@ def regress_RR_author(ata='author'):
         lines.append('\n'.join(formulate_ols(data, formula)))
 
         # 确定回归的自变量和因变量
-        formula = f'{left} ~ SQUARE({attr}) +pn + n1_yd +max_sc_num'
+        formula = f'{left} ~ SQUARE({attr}) +{attr} + n1_yd +max_sc_num'
 
         lines.append('\n'.join(formulate_ols(data, formula)))
 
@@ -95,6 +95,6 @@ def formulate_ols(data, formula):
 
 
 if __name__ == '__main__':
-    regress_RR_author('author')
+    # regress_RR_author('author')
 
     regress_RR_author('paper')
