@@ -127,10 +127,10 @@ def plot_attr(data, attr, label, index, index_label):
     else:
         ax.set_xlabel('number of publications')
 
-    ax.set_xscale('log')
-
     if index == 'N1':
-        ax.set_yscale('log')
+        ax.set_xscale('linear')
+    else:
+        ax.set_xscale('log')
 
     plt.tight_layout()
 
