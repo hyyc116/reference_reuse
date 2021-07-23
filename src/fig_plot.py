@@ -129,6 +129,9 @@ def plot_attr(data, attr, label, index, index_label):
 
     ax.set_xscale('log')
 
+    if index == 'N1':
+        ax.set_yscale('log')
+
     plt.tight_layout()
 
     plt.savefig(f'fig/{label}_{attr}_{index}_dis.png', dpi=800)
