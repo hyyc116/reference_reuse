@@ -74,6 +74,7 @@ def plot_attr(data, attr, label, index, index_label):
 
         ax.plot(xs, ys)
         ax.set_xscale('log')
+        ax.set_yscale('log')
 
     else:
         sns.histplot(data=data[data[f'{attr}'] > 0],
