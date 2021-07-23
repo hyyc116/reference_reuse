@@ -25,7 +25,7 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     data = data[data['a'] < 12]
 
     data['a'] = -data['a']
-    data = data[data['N1'] < 40]
+    data = data[data['N1'] < 100]
     if attr == 'cn':
         data = data[data['cn'] < 100000]
     elif attr == 'pn':
