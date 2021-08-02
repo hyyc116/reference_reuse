@@ -36,7 +36,7 @@ def process_data():
 
         # 排除发表年份以及作者数据缺失的引用关系
         if int(pid_pubyear.get(paper_id, 9999)) > 2010 or int(
-                pid_pubyear.get(paper_reference_id, 9999)) > 20120:
+                pid_pubyear.get(paper_reference_id, 9999)) > 2010:
             continue
 
         if int(pid_pubyear.get(paper_id, 9999)) < 1991 or int(
@@ -83,6 +83,9 @@ def process_data():
         if pubyear is None:
             continue
 
+        if len(set(authors)) < 3:
+            continue
+
         max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
             pid_author_cits[pid], authors)
 
@@ -104,7 +107,7 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/paper_reuse_attrs.csv.')
+    logging.info('attrs saved to data/paper_reuse_attrs2.csv.')
 
     #  从作者角度来计算这些属性
     logging.info('start to cal author attrs ...')
@@ -121,6 +124,9 @@ def process_data():
         ref_years = author_ref_years[author]
 
         progress += 1
+
+        if len(papers) < 3:
+            continue
 
         if progress % 1000000 == 0:
             logging.info(f'author progress {progress} ...')
@@ -146,7 +152,7 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/author_reuse_attrs.csv.')
+    logging.info('attrs saved to data/author_reuse_attrs2.csv.')
 
 
 def cal_author_alpha_and_n1(ref_years, papers):

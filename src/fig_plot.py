@@ -36,9 +36,9 @@ def plot_paper_relations(path='data/paper_reuse_attrs.csv',
     data['SCR'] = data['max_sc_num'] / data['N1']
 
     plot_attr(data, attr, label, 'a', '$\\alpha$')
-    plot_attr(data, attr, label, 'N1', 'N1')
-    plot_attr(data, attr, label, 'max_num', 'max num')
-    plot_attr(data, attr, label, 'SCR', 'SCR')
+    # plot_attr(data, attr, label, 'N1', 'N1')
+    # plot_attr(data, attr, label, 'max_num', 'max num')
+    # plot_attr(data, attr, label, 'SCR', 'SCR')
 
     # plot_attr(data, attr, label, 'max_sc', 'max sc')
 
