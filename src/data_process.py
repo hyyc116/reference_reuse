@@ -39,8 +39,7 @@ def process_data():
                 pid_pubyear.get(paper_reference_id, 9999)) > 2010:
             continue
 
-        if int(pid_pubyear.get(paper_id, 9999)) < 1991 or int(
-                pid_pubyear.get(paper_reference_id, 9999)) < 1991:
+        if int(pid_pubyear.get(paper_id, 9999)) < 1971:
             continue
 
         authors = pid_seq_author.get(paper_id, None)
