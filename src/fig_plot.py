@@ -114,8 +114,8 @@ def plot_attr(data, attr, label, index, index_label):
     ys = newdata[index]
 
     # sns.lineplot(data=data, x=f'{attr}', y=index, ax=ax, color=color)
-    xs, ys = moving_average(xs, ys, 0.5, True)
-    # ax.plot(xs, ys,color=)
+    # xs, ys = moving_average(xs, ys, 0.5, True)
+    # ax.plot(xs, ys)
 
     ax.plot(xs, ys, color=color)
 
@@ -123,9 +123,9 @@ def plot_attr(data, attr, label, index, index_label):
 
     ax.set_ylabel(index_label)
     if attr == 'cn':
-        ax.set_xlabel('number of citations')
+        ax.set_xlabel('Number of citations')
     else:
-        ax.set_xlabel('number of publications')
+        ax.set_xlabel('Number of publications')
 
     if index == 'N1':
         ax.set_xscale('linear')
