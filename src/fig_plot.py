@@ -188,10 +188,10 @@ def moving_average(xs, ys, window, logX=False):
     #     smooth_ys.append(np.mean(ys[:i + 1]))
 
     # return smooth_xs, smooth_ys
-    xi, yi = zip(*lowess(ys, xs, frac=0.8, it=0))
+    # xi, yi = zip(*lowess(ys, xs, frac=0.8, it=0))
     # z = lowess(ys, xs, frac=0.02, is_sorted=True)
 
-    return xi, yi
+    return xs,ys
 
 
 if __name__ == "__main__":
