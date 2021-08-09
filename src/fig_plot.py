@@ -13,6 +13,8 @@
 from basic_config import *
 import seaborn as sns
 import pandas as pd
+import statsmodels.api as sm
+lowess = sm.nonparametric.lowess
 
 
 # 画属性随着时间的变化
@@ -114,7 +116,7 @@ def plot_attr(data, attr, label, index, index_label):
     ys = newdata[index]
 
     # sns.lineplot(data=data, x=f'{attr}', y=index, ax=ax, color=color)
-    # xs, ys = moving_average(xs, ys, 0.5, True)
+    xs, ys = moving_average(xs, ys, 0.5, True)
     # ax.plot(xs, ys)
 
     ax.plot(xs, ys, color=color)
@@ -186,12 +188,12 @@ def moving_average(xs, ys, window, logX=False):
     #     smooth_ys.append(np.mean(ys[:i + 1]))
 
     # return smooth_xs, smooth_ys
+    xi, yi = zip(*lowess(ys, xs, frac=1. / 3, it=0))
+    # z = lowess(ys, xs, frac=0.02, is_sorted=True)
 
-    z = lowess(ys, xs, frac=0.02, is_sorted=True)
-
-    return z[:, 0], z[:, 1]
+    return xi, yi
 
 
 if __name__ == "__main__":
-    # plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
+    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
     plot_paper_relations('data/author_reuse_attrs.csv', 'author', 'pn')
