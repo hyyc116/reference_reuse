@@ -99,7 +99,15 @@ def plot_attr(data, attr, label, index, index_label):
     sns.despine()
 
     ax.set_xlabel(index_label)
-    ax.set_ylabel('number of publications')
+
+    if label == 'paper':
+        # color = sns.color_palette()[1]
+        ax.set_ylabel('Number of citations')
+
+    elif label == 'author':
+        # color = sns.color_palette()[0]
+        ax.set_ylabel('Number of publications')
+
 
     plt.tight_layout()
 
