@@ -203,5 +203,5 @@ def moving_average(xs, ys, window, logX=False):
 
 
 if __name__ == "__main__":
-    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
+    # plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
     plot_paper_relations('data/author_reuse_attrs.csv', 'author', 'pn')
