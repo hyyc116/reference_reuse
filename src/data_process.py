@@ -50,7 +50,7 @@ def process_data():
             continue
 
         # 将论文被引用和作者引用论文记录下来
-        for author in authors.values():
+        for author in authors.get('1',[]):
             pid_author_cits[paper_reference_id][author].append(
                 int(pid_pubyear.get(paper_id)))
 
@@ -65,7 +65,7 @@ def process_data():
         'pid,pubyear,cn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
     ]
 
-    outfile = open('data/paper_reuse_attrs.csv', 'w')
+    outfile = open('data/paper_reuse_attrs_first_author.csv', 'w')
 
     progress = 0
 
@@ -115,7 +115,7 @@ def process_data():
         'author_id,pn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
     ]
 
-    outfile = open('data/author_reuse_attrs.csv', 'w')
+    outfile = open('data/author_reuse_attrs_first_author.csv', 'w')
 
     progress = 0
     for author in author_ref_years:
