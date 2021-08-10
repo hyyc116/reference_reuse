@@ -98,15 +98,15 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.despine()
 
-    ax.set_xlabel(index_label)
+    ax.set_xlabel(index_label,size=20)
 
     if label == 'paper':
         # color = sns.color_palette()[1]
-        ax.set_ylabel('Number of citations')
+        ax.set_ylabel('Number of citations',size=20)
 
     elif label == 'author':
         # color = sns.color_palette()[0]
-        ax.set_ylabel('Number of publications')
+        ax.set_ylabel('Number of publications',size=20)
 
 
     plt.tight_layout()
@@ -131,11 +131,11 @@ def plot_attr(data, attr, label, index, index_label):
 
     sns.despine()
 
-    ax.set_ylabel(index_label)
+    ax.set_ylabel(index_label,size=20)
     if attr == 'cn':
-        ax.set_xlabel('Number of citations')
+        ax.set_xlabel('Number of citations',size=20)
     else:
-        ax.set_xlabel('Number of publications')
+        ax.set_xlabel('Number of publications',size=20)
 
     if index == 'N1':
         ax.set_xscale('linear')
@@ -203,5 +203,5 @@ def moving_average(xs, ys, window, logX=False):
 
 
 if __name__ == "__main__":
-    # plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
+    plot_paper_relations('data/paper_reuse_attrs.csv', 'paper', 'cn')
     plot_paper_relations('data/author_reuse_attrs.csv', 'author', 'pn')
