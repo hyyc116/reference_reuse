@@ -211,7 +211,61 @@ def moving_average(xs, ys, window, logX=False):
 
     return xs,ys
 
+def neg_alpha():
+    data = pd.read_csv('fdata/paper_reuse_attrs.csv')
+    analyze_negative_alpha(data,'paper')
+
+    data = pd.read_csv('fdata/author_reuse_attrs.csv')
+    analyze_negative_alpha(data,'author')
+
+
+def analyze_negative_alpha(data,label):
+
+    if label=='paper':
+        index = 'cn'
+    else:
+        index = 'pn'
+
+    color = None
+    if label == 'paper':
+        color = sns.color_palette()[1]
+    elif label == 'author':
+        color = sns.color_palette()[0]
+    
+    fig, ax = plt.subplots(figsize=(5, 4))
+    
+    sns.histplot(data=data[data['a'] < 0],
+                 x=index,
+                 bins=50,
+                 ax=ax,
+                 kde=False,
+                 color=color,
+                 stat='probability')
+    
+    if label=='author':
+        ax.set_xlabel('Number of publications',size=15)
+    else:
+        ax.set_xlabel('Number of citations',size=15)
+    
+
+    ax.set_ylabel('Probability')
+
+    plt.tight_layout()
+
+    plt.savefig(f'fig/{label}_neg_a.png',dpi=400)
+    logging.info(f'fig saved to fig/{label}_neg_a.png')
+
+
+
+
+
+
+
+    pass
+
 
 if __name__ == "__main__":
-    plot_paper_relations('data/paper_reuse_attrs_first_author.csv', 'paper', 'cn')
-    plot_paper_relations('data/author_reuse_attrs_first_author.csv', 'author', 'pn')
+    # plot_paper_relations('data/paper_reuse_attrs_first_author.csv', 'paper', 'cn')
+    # plot_paper_relations('data/author_reuse_attrs_first_author.csv', 'author', 'pn')
+
+    neg_alpha()
