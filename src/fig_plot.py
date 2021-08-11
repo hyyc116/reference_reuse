@@ -89,7 +89,7 @@ def plot_attr(data, attr, label, index, index_label):
 
         mean = np.mean(data[index])
         ax.plot([mean] * 10,
-                np.linspace(0, 0.2, 10),
+                np.linspace(0, np.max(data[f'{attr}']), 10),
                 '--',
                 label='mean:{:.2f}'.format(mean),
                 c='r')
