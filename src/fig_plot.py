@@ -212,10 +212,10 @@ def moving_average(xs, ys, window, logX=False):
     return xs,ys
 
 def neg_alpha():
-    data = pd.read_csv('fdata/paper_reuse_attrs.csv')
+    data = pd.read_csv('data/paper_reuse_attrs.csv')
     analyze_negative_alpha(data,'paper')
 
-    data = pd.read_csv('fdata/author_reuse_attrs.csv')
+    data = pd.read_csv('data/author_reuse_attrs.csv')
     analyze_negative_alpha(data,'author')
 
 
