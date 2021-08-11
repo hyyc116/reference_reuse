@@ -88,11 +88,21 @@ def plot_attr(data, attr, label, index, index_label):
                      stat='probability')
 
         mean = np.mean(data[index])
-        ax.plot([mean] * 10,
-                np.linspace(0, np.max(data[f'{attr}']), 10),
-                '--',
-                label='mean:{:.2f}'.format(mean),
-                c='r')
+
+        if label=='author':
+            ax.plot([mean] * 10,
+                    np.linspace(0, 0.2, 10),
+                    '--',
+                    label='mean:{:.2f}'.format(mean),
+                    c='r')
+        else:
+
+            ax.plot([mean] * 10,
+                    np.linspace(0, 0.1, 10),
+                    '--',
+                    label='mean:{:.2f}'.format(mean),
+                    c='r')
+
 
         ax.legend()
 
