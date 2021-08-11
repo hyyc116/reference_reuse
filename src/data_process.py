@@ -50,14 +50,19 @@ def process_data():
             continue
 
         # 将论文被引用和作者引用论文记录下来
-        for author in authors.get('1',[]):
-            pid_author_cits[paper_reference_id][author].append(
-                int(pid_pubyear.get(paper_id)))
+        # for author in authors.get('1',[]):
+        author = authors.get('1',None)
 
-            author_ref_years[author][paper_reference_id].append(
-                int(pid_pubyear.get(paper_id)))
+        if author is None:
+            continue
+        
+        pid_author_cits[paper_reference_id][author].append(
+            int(pid_pubyear.get(paper_id)))
 
-            author_papers[author].add(paper_id)
+        author_ref_years[author][paper_reference_id].append(
+            int(pid_pubyear.get(paper_id)))
+
+        author_papers[author].add(paper_id)
 
     logging.info('start to cal paper attrs ...')
 
