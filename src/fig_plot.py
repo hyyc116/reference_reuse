@@ -240,7 +240,8 @@ def analyze_negative_alpha(data,label):
                  ax=ax,
                  kde=False,
                  color=color,
-                 stat='probability')
+                 stat='probability',
+                 log_scale=True)
     
     if label=='author':
         ax.set_xlabel('Number of publications',size=15)
