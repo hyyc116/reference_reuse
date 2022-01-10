@@ -35,6 +35,7 @@ def process_data():
             logging.info(f'read progress {process} ....')
 
         # 排除发表年份以及作者数据缺失的引用关系
+<<<<<<< HEAD
         if int(pid_pubyear.get(paper_reference_id, 9999)) > 2010 or int(
                 pid_pubyear.get(paper_reference_id, -1)) < 1991:
             continue
@@ -42,6 +43,14 @@ def process_data():
         # if int(pid_pubyear.get(paper_id, 9999)) < 1991 or int(
         #         pid_pubyear.get(paper_reference_id, 9999)) < 1991:
         #     continue
+=======
+        if int(pid_pubyear.get(paper_id, 9999)) > 2010 or int(
+                pid_pubyear.get(paper_reference_id, 9999)) > 2010:
+            continue
+
+        if int(pid_pubyear.get(paper_id, 9999)) < 1971:
+            continue
+>>>>>>> 7101aa981730ddde2c29df8a3684058daf923680
 
         authors = pid_seq_author.get(paper_id, None)
 
@@ -51,14 +60,19 @@ def process_data():
             continue
 
         # 将论文被引用和作者引用论文记录下来
-        for author in authors.values():
-            pid_author_cits[paper_reference_id][author].append(
-                int(pid_pubyear.get(paper_id)))
+        # for author in authors.get('1',[]):
+        author = authors.get('1',None)
 
-            author_ref_years[author][paper_reference_id].append(
-                int(pid_pubyear.get(paper_id)))
+        if author is None:
+            continue
+        
+        pid_author_cits[paper_reference_id][author].append(
+            int(pid_pubyear.get(paper_id)))
 
-            author_papers[author].add(paper_id)
+        author_ref_years[author][paper_reference_id].append(
+            int(pid_pubyear.get(paper_id)))
+
+        author_papers[author].add(paper_id)
 
     logging.info('start to cal paper attrs ...')
 
@@ -66,7 +80,7 @@ def process_data():
         'pid,pubyear,cn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
     ]
 
-    outfile = open('data/paper_reuse_attrs.csv', 'w')
+    outfile = open('data/paper_reuse_attrs_first_author.csv', 'w')
 
     progress = 0
 
@@ -81,6 +95,9 @@ def process_data():
         authors = [a for a in pid_seq_author[pid].values()]
 
         if pubyear is None:
+            continue
+
+        if len(set(authors)) < 3:
             continue
 
         max_num, max_num_yd, N1, a, n1_yd, sc_num_avg, sc_yd_avg, max_sc_num, max_sc_yd = cal_paper_alpha_and_n1(
@@ -104,7 +121,7 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/paper_reuse_attrs.csv.')
+    logging.info('attrs saved to data/paper_reuse_attrs2.csv.')
 
     #  从作者角度来计算这些属性
     logging.info('start to cal author attrs ...')
@@ -113,7 +130,7 @@ def process_data():
         'author_id,pn,max_num,max_num_yd,N1,a,n1_yd,sc_num_avg,sc_yd_avg,max_sc_num,max_sc_yd'
     ]
 
-    outfile = open('data/author_reuse_attrs.csv', 'w')
+    outfile = open('data/author_reuse_attrs_first_author.csv', 'w')
 
     progress = 0
     for author in author_ref_years:
@@ -121,6 +138,9 @@ def process_data():
         ref_years = author_ref_years[author]
 
         progress += 1
+
+        if len(papers) < 3:
+            continue
 
         if progress % 1000000 == 0:
             logging.info(f'author progress {progress} ...')
@@ -146,7 +166,7 @@ def process_data():
     if len(lines) > 0:
         outfile.write('\n'.join(lines) + '\n')
 
-    logging.info('attrs saved to data/author_reuse_attrs.csv.')
+    logging.info('attrs saved to data/author_reuse_attrs2.csv.')
 
 
 def cal_author_alpha_and_n1(ref_years, papers):
